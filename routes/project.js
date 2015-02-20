@@ -5,6 +5,14 @@ exports.projectInfo = function(req, res) { 
 
   // query for the specific project and
   // call the following callback
+  models.BlogPost
+  .find()
+  .sort('-date')
+  .exec(displayPosts); 
+
+  function displayPosts(err, blo_posts){
+
+  }
 
   function afterQuery(err, projects) {
     if(err) console.log(err);
@@ -22,6 +30,11 @@ exports.addProject = function(req, res) {
 
 exports.deleteProject = function(req, res) {
   var projectID = req.params.id;
+
+  models.BlogPost
+  .find({"title": "LOL Cat Invasion"})
+  .update({"body_text": "Post content removed"})
+  .exec(afterUpdating); 
 
   // find the project and remove it
   // YOU MUST send an OK response w/ res.send();
